@@ -27,16 +27,22 @@ def bins():
 
 data = fileToData(dataFile)
 
+print(len(data))
+
 fig, ax = plt.subplots()
 ax.hist(data,bins = bins())
-print(statistics.median(data))
+ax.set_title("Histogram of Raw Data")
+ax.set_xlabel("Byte Value")
+ax.set_ylabel("Count")
 
 lifetimeNumber = []
 lifetimeCount = []
 for i in range(0,256):
     if(not data.count(i) == 0):
-        lifetimeNumber.append(i*80+25)
+        lifetimeNumber.append(i*80-55)
         lifetimeCount.append(data.count(i))
+
+print(lifetimeNumber)
 
 fig2, ax2 = plt.subplots()
 ax2.scatter(np.array(lifetimeNumber),lifetimeCount,2,label = "Raw Data")
@@ -73,7 +79,7 @@ ax2.plot(np.array(lifetimeNumber),lifetimeNumberSingleExpFit,'tab:orange',linest
 ax2.plot(np.array(lifetimeNumber),lifetimeNumberDoubleExpFit,'tab:green',linestyle = '--', label = doubleExpFitLabel)
 ax2.plot(np.array(lifetimeNumber),lifetimeNumberCaptureExpFit,'tab:red',linestyle = '--', label = captureExpFitLabel)
 ax2.legend()
-ax2.set_title("Time between Start and Stop Signals")
+ax2.set_title("Muon Capture and Decay")
 ax2.set_xlabel("Lifetime (ns)")
 ax2.set_ylabel("Count")
 
